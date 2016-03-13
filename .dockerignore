@@ -1,0 +1,6 @@
+*
+!package.json
+!dist/
+!dist/*
+!src/
+!src/*
