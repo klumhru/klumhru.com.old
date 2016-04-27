@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot --port 3000",
     "docker-builder": "docker build -f Dockerfile.builder -t webpack-builder .",
-    "docker": "docker run --rm --name building-app -v ${PWD}/src:/usr/src/app/src -v ${PWD}/webpack.config.js:/usr/src/app/webpack.config.js -e NODE_ENV=production webpack-builder npm run build && docker build -t docker.klumhru.com/klumhru/www ."
+    "docker": "docker run --rm --name building-app -v ${PWD}/src:/usr/src/app/src -v ${PWD}/webpack.config.js:/usr/src/app/webpack.config.js -e NODE_ENV=production webpack-builder npm run build && docker build -t ${DOCKER_IMAGE} ."
   },
   "repository": {
     "type": "git",
@@ -30,15 +30,19 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "lodash": "^4.6.1",
+    "material-design-lite": "^1.1.3",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-mdl": "^1.5.3",
     "webpack": "^1.12.14"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
-    "eslint": "^2.4.0",
+    "css-loader": "^0.23.1",
+    "eslint": "^2.7.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-react": "^4.2.1",
+    "style-loader": "^0.13.1",
     "webpack-dev-server": "^1.14.1"
   },
   "eslintConfig": {
