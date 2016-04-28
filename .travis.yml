@@ -1,6 +1,7 @@
 sudo: required
 services:
   - docker
+  - gcloud
 language: node_js
 node_js:
   - "5"
@@ -11,11 +12,14 @@ before_install:
   # install google cloud sdk if not there
   - if [ ! -d ${HOME}/google-cloud-sdk ]; then
       curl https://sdk.cloud.google.com | bash;
+      export PATH=${HOME}/google-cloud-sdk/bin:${PATH}
     fi
+  - pip install PyOpenSSL
   # Start auth
   # GCLOUD_CLIENT_SECRET is a base64 encoded client-secret.json file from
   # Google Credentials Console
   - echo ${GCLOUD_CLIENT_SECRET} | base64 -d > client-secret.json
+  - head -n 3 client-secret.json
   - gcloud auth activate-service-account ${GCLOUD_SERVICE_ACCOUNT} --key-file client-secret.json
   # End auth
   - gcloud config set project ${PROJECT_ID}
