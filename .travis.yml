@@ -1,33 +1,30 @@
 sudo: required
 services:
-  - docker
+- docker
 language: node_js
 node_js:
-  - "5"
+- '5'
 cache:
   directories:
-    - "$HOME/google-cloud-sdk/"
+  - "$HOME/google-cloud-sdk/"
 before_install:
-  # install google cloud sdk if not there
-  - if [ ! -d ${HOME}/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash; fi
-  - export PATH=${HOME}/google-cloud-sdk/bin:${PATH}
-  # Start auth
-  # GCLOUD_CLIENT_SECRET is a base64 encoded client-secret.json file from
-  # Google Credentials Console
-  - echo ${GCLOUD_CLIENT_SECRET} | base64 -d > client-secret.json
-  - echo ${PATH}
-  - gcloud auth activate-service-account --key-file client-secret.json
-  # End auth
-  - gcloud config set project ${PROJECT_ID}
+- openssl aes-256-cbc -K $encrypted_61002d288013_key -iv $encrypted_61002d288013_iv
+  -in client-secret.json.enc -out client-secret.json -d
+- if [ ! -d ${HOME}/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash;
+  fi
+- export PATH=${HOME}/google-cloud-sdk/bin:${PATH}
+- echo ${PATH}
+- gcloud auth activate-service-account --key-file client-secret.json
+- gcloud config set project ${PROJECT_ID}
 install:
-  - gcloud -q components update kubectl
-  - gcloud container clusters get-credentials ${CLUSTER_ID} --zone ${ZONE_ID}
+- gcloud -q components update kubectl
+- gcloud container clusters get-credentials ${CLUSTER_ID} --zone ${ZONE_ID}
 before_script:
-  - npm install -g webpack
+- npm install -g webpack
 script:
-  - npm run test
-  - npm run docker-builder
-  - npm run docker
+- npm run test
+- npm run docker-builder
+- npm run docker
 after_success:
-  - gcloud docker push ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}
-  - kubectl rolling-update deployment ${DEPLOYMENT_NAME} --image ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}
+- gcloud docker push ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}
+- kubectl rolling-update deployment ${DEPLOYMENT_NAME} --image ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}
