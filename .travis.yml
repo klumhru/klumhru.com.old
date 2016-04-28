@@ -12,17 +12,13 @@ node_js:
 before_install:
 - openssl aes-256-cbc -K $encrypted_61002d288013_key -iv $encrypted_61002d288013_iv
   -in client-secret.json.enc -out client-secret.json -d
-- if [ ! -d $HOME/google-cloud-sdk ]; then
-    curl https://sdk.cloud.google.com | bash;
-  fi
-
-- $HOME/google-cloud-sdk/bin/gcloud version
+install:
+- curl https://sdk.cloud.google.com | bash;
 - $HOME/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file client-secret.json
 - $HOME/google-cloud-sdk/bin/gcloud config set project ${PROJECT_ID}
-install:
 - $HOME/google-cloud-sdk/bin/gcloud -q components install kubectl docker
-- $HOME/google-cloud-sdk/bin/gcloud container clusters get-credentials ${CLUSTER_ID} --zone ${ZONE_ID}
 before_script:
+- $HOME/google-cloud-sdk/bin/gcloud container clusters get-credentials ${CLUSTER_ID} --zone ${ZONE_ID}
 - npm install -g webpack
 script:
 - npm run test
