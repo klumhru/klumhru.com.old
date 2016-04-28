@@ -1,7 +1,6 @@
 sudo: required
 services:
   - docker
-  - gcloud
 language: node_js
 node_js:
   - "5"
@@ -16,8 +15,8 @@ before_install:
   # GCLOUD_CLIENT_SECRET is a base64 encoded client-secret.json file from
   # Google Credentials Console
   - echo ${GCLOUD_CLIENT_SECRET} | base64 -d > client-secret.json
-  - head -n 3 client-secret.json
-  - gcloud auth activate-service-account ${GCLOUD_SERVICE_ACCOUNT} --key-file client-secret.json
+  - echo ${PATH}
+  - gcloud auth activate-service-account --key-file client-secret.json
   # End auth
   - gcloud config set project ${PROJECT_ID}
 install:
