@@ -3,6 +3,7 @@ services:
 - docker
 env:
 - PATH=$HOME/google-cloud-sdk/bin:$PATH
+- IMAGE_TAG=${TRAVIS_BUILD_NUMBER}-travis-node-${TRAVIS_NODE_VERSION}
 language: node_js
 node_js:
 - '5'
@@ -24,4 +25,4 @@ script:
 - npm run docker
 after_success:
 - "$HOME/google-cloud-sdk/bin/gcloud docker push ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}"
-- kubectl rolling-update deployment ${DEPLOYMENT_NAME} --image ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}
+- "$HOME/google-cloud-sdk/bin/kubectl rolling-update ${DEPLOYMENT_NAME} --image ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}
