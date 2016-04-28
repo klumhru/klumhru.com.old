@@ -1,19 +1,20 @@
 sudo: required
 services:
 - docker
+env:
+  - PATH=$PATH:${HOME}/google-cloud-sdk/bin
 language: node_js
 node_js:
 - '5'
-cache:
-  directories:
-  - "$HOME/google-cloud-sdk/"
+# cache:
+#   directories:
+#   - "$HOME/google-cloud-sdk/"
 before_install:
 - openssl aes-256-cbc -K $encrypted_61002d288013_key -iv $encrypted_61002d288013_iv
   -in client-secret.json.enc -out client-secret.json -d
-- if [ ! -d ${HOME}/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash;
+- if [ ! -d ${HOME}/google-cloud-sdk ]; then
+    curl https://sdk.cloud.google.com | bash;
   fi
-- export PATH=${HOME}/google-cloud-sdk/bin:${PATH}
-- echo ${PATH}
 - gcloud version
 - which gcloud
 - ${HOME}/google-cloud-sdk/bin/gcloud version
