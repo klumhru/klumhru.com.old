@@ -20,6 +20,7 @@ before_script:
   --zone ${ZONE_ID}"
 - npm install -g webpack
 script:
+- npm config set loglevel warn
 - npm run test
 - npm run docker-builder
 - npm run docker
