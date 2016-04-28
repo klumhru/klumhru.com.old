@@ -4,3 +4,5 @@ npm-debug.log
 kubernetes kubernetes.tar.gz
 kubernetes/
 kubernetes.tar.gz
+client-secret.json
+*.key
