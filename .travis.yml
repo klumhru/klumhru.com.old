@@ -16,7 +16,7 @@ install:
 - curl https://sdk.cloud.google.com | bash;
 - $HOME/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file client-secret.json
 - $HOME/google-cloud-sdk/bin/gcloud config set project ${PROJECT_ID}
-- $HOME/google-cloud-sdk/bin/gcloud -q components install kubectl docker
+- $HOME/google-cloud-sdk/bin/gcloud -q components install kubectl
 before_script:
 - $HOME/google-cloud-sdk/bin/gcloud container clusters get-credentials ${CLUSTER_ID} --zone ${ZONE_ID}
 - npm install -g webpack
