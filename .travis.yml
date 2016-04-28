@@ -21,10 +21,7 @@ install:
 before_script:
 - "$HOME/google-cloud-sdk/bin/gcloud container clusters get-credentials ${CLUSTER_ID}
   --zone ${ZONE_ID}"
-- npm install -g webpack
 script:
-- npm config set loglevel warn
-- npm run test
 - npm run docker-builder
 - npm run docker
 after_success:
