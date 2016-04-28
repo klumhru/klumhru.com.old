@@ -12,7 +12,6 @@ before_install:
   # install google cloud sdk if not there
   - if [ ! -d ${HOME}/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash; fi
   - export PATH=${HOME}/google-cloud-sdk/bin:${PATH}
-  - pip install PyOpenSSL
   # Start auth
   # GCLOUD_CLIENT_SECRET is a base64 encoded client-secret.json file from
   # Google Credentials Console
