@@ -4,6 +4,9 @@ services:
 env:
 - PATH=$HOME/google-cloud-sdk/bin:$PATH
 - IMAGE_TAG=${TRAVIS_BUILD_NUMBER}-travis-node-${TRAVIS_NODE_VERSION}
+cache:
+  directories:
+    - "$HOME/google-cloud-sdk/"
 language: node_js
 node_js:
 - '5'
