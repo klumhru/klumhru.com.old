@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: www-klumhru-com-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: frontend
+        name: www-klumhru-com-deployment
+    spec:
+      containers:
+        - name: www-klumhru-com
+          image: gcr.io/klumhru-com/www:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 80
