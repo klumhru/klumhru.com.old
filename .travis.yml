@@ -23,4 +23,4 @@ script:
 - npm run docker
 after_success:
 - "$HOME/google-cloud-sdk/bin/gcloud docker push ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}"
-- "$HOME/google-cloud-sdk/bin/kubectl rolling-update ${DEPLOYMENT_NAME} --image ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}"
+- cat klumhru-com.deployment.yml | IMAGE=${DOCKER_IMAGE}:${IMAGE_TAG:-latest} util/env_replace.py | kubectl apply -f -
