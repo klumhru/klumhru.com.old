@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: www-klumhru-com
-          image: IMAGE_FULL
+          image: TPL_DOCMER_IMAGE
           resources:
             requests:
               cpu: 100m

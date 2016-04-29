@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot --port 3000",
     "docker-builder": "docker build -f Dockerfile.builder -t webpack-builder .",
-    "docker": "docker run --rm --name building-app -v ${PWD}/src:/usr/src/app/src -v ${PWD}/webpack.config.js:/usr/src/app/webpack.config.js -e NODE_ENV=production webpack-builder npm run build && docker build -t ${DOCKER_IMAGE} ."
+    "docker": "docker run --rm --name building-app -v ${PWD}/src:/usr/src/app/src -v ${PWD}/webpack.config.js:/usr/src/app/webpack.config.js -e NODE_ENV=production webpack-builder npm run build && docker build -t ${DOCKER_IMAGE:-gcr.io/klumhru-com/www}:${IMAGE_TAG:-latest} ."
   },
   "repository": {
     "type": "git",

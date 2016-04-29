@@ -2,7 +2,7 @@ sudo: required
 services:
 - docker
 env:
-- PATH=$HOME/google-cloud-sdk/bin:$PATH IMAGE_TAG=${TRAVIS_BUILD_NUMBER}-travis-node-${TRAVIS_NODE_VERSION}
+- PATH=$HOME/google-cloud-sdk/bin:$PATH IMAGE_TAG=${TRAVIS_BUILD_NUMBER}-travis
 language: node_js
 node_js:
 - '5'
@@ -22,4 +22,4 @@ script:
 - npm run docker
 after_success:
 - "$HOME/google-cloud-sdk/bin/gcloud docker push ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}"
-- cat klumhru-com.deployment.yml | IMAGE_FULL=${DOCKER_IMAGE}:${IMAGE_TAG:-latest} util/env_replace.py IMAGE_FULL | kubectl apply -f -
+- cat klumhru-com.deployment.yml | TPL_DOCMER_IMAGE=${DOCKER_IMAGE}:${IMAGE_TAG:-latest} util/env_replace.py TPL_DOCMER_IMAGE | kubectl apply -f -
