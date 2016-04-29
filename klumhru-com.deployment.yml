@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: www-klumhru-com
-          image: gcr.io/klumhru-com/www:latest
+          image: IMAGE_FULL
           resources:
             requests:
               cpu: 100m

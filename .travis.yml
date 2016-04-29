@@ -22,4 +22,4 @@ script:
 - npm run docker
 after_success:
 - "$HOME/google-cloud-sdk/bin/gcloud docker push ${DOCKER_IMAGE}:${IMAGE_TAG:-latest}"
-- cat klumhru-com.deployment.yml | IMAGE=${DOCKER_IMAGE}:${IMAGE_TAG:-latest} util/env_replace.py | kubectl apply -f -
+- cat klumhru-com.deployment.yml | IMAGE_FULL=${DOCKER_IMAGE}:${IMAGE_TAG:-latest} util/env_replace.py IMAGE_FULL | kubectl apply -f -
